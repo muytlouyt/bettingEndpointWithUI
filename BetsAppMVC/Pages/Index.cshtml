@@ -1,0 +1,20 @@
+﻿@page
+@model LoginModel
+@{
+}
+
+<form class="login-window" method="post">
+    <h2>Welcome to betting app!</h2>
+    <div>
+        @Html.Label("login", "Login: ")
+        @Html.TextBoxFor(it => it.Input.UserName)
+    </div>
+    <div>
+        @Html.Label("password", "Password: ")
+        @Html.PasswordFor(it => it.Input.Password)
+    </div>
+    <button type="submit">Login</button>
+    <div>
+        @ViewContext.ViewData.ModelState.GetValueOrDefault("login")?.Errors[0].ErrorMessage
+    </div>
+</form>

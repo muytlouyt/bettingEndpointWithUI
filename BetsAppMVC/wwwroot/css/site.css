@@ -1,0 +1,115 @@
+html {
+    height:100%;
+    font-size: 14px;
+    
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    background-image: url("/background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    margin-bottom: 60px;
+}
+
+header {
+    flex: 0 1 auto;
+}
+
+#betCarousel {
+    margin: 40px;
+    width: 100%;
+    height: 100%;
+}
+
+    #betCarousel .carousel-inner {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
+.login-window {
+    height: 300px;
+    width: 500px;
+}
+
+.main-window {
+    height: 420px;
+    width: 550px;
+}
+
+.login-window,
+.main-window {
+    flex: 1 1 auto;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgray;
+    border: 1px solid green;
+    border-radius: 30px;
+}
+
+    .login-window label,
+    .main-window label {
+        width: 100px;
+    }
+
+    .login-window div,
+    .main-window div {
+        margin-bottom: 10px;
+    }
+
+        .login-window div select,
+        .login-window div input,
+        .main-window div select,
+        .main-window div input {
+            width: 150px;
+        }
+
+.main-window {
+    flex: 1 1 auto;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgray;
+    width: 550px;
+    height: 420px;
+    border: 1px solid green;
+    border-radius: 30px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    height: 32px;
+    margin: auto;
+}
+
+.toast-header {
+    padding: 5px;
+    background-color: unset;
+}
+
+    .toast-header
+    .close {
+        border: 0px;
+        background-color: unset;
+    }

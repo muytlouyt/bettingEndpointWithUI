@@ -1,0 +1,96 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@using BetsAppMVC.Services;
+@inject IEventsService EventService;
+
+
+<div class="main-window">
+    <div id="betCarousel" class="carousel" data-interval="false">
+        <div class="carousel-inner">
+            @foreach (var sportEvent in EventService.GetEvents())
+            {
+                <div class="carousel-item">
+                    <h2>@sportEvent.Name</h2>
+                    <div>
+                        @Html.Label($"startDate{sportEvent.Id}", "Event start date: ")
+                        @Html.TextBox($"startDate{sportEvent.Id}", sportEvent.StartDate.ToShortDateString(), new { disabled = true })
+                    </div>
+                    <div>
+                        @Html.Label($"isLive{sportEvent.Id}", "Is live event?")
+                        @Html.CheckBox($"isLive{sportEvent.Id}", sportEvent.IsLive, new { disabled = true })
+                    </div>
+                    @foreach (var odd in sportEvent.Odds)
+                    {
+                        <div>
+                            @Html.Label($"actualOdd{sportEvent.Id}_{odd.Id}", "Actual odd:")
+                            @Html.TextBox($"actualOdd{sportEvent.Id}_{odd.Id}", odd.Value, new { type = "number", disabled = true })
+                        </div>
+                    }
+                    <div>
+                        @Html.Label("odd", "Your odd:")
+                        @Html.TextBox($"odd{sportEvent.Id}", null, new { id = $"odd{sportEvent.Id}", type = "number" })
+                    </div>
+                    <div>
+                        @Html.Label("money", "Money:")
+                        @Html.TextBox($"money{sportEvent.Id}", null, new { id = $"money{sportEvent.Id}", type = "number" })
+                    </div>
+                    <button onclick="makeBet(@sportEvent.Id);">Make bet</button>
+                </div>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button">
+            <span class="carousel-control-prev-icon" aria-hidden="true" data-bs-target="#betCarousel" data-bs-slide="prev"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button">
+            <span class="carousel-control-next-icon" aria-hidden="true" data-bs-target="#betCarousel" data-bs-slide="next"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", (function () {
+        document.getElementsByClassName('carousel-item')[0].classList.add('active');
+        updateHeader();
+    }));
+
+    function updateHeader() {
+        $.ajax({
+            type: 'GET',
+            url: 'api/players',
+            contentType: 'application/json',
+            success: function (data) {
+                $("#login").html('Hello ' + data.username + '! Balance: ' + data.balance);
+            },
+            error: function (xhr, status, error) {
+                $(".toast-body").html(error);
+                $('.toast').toast('show')
+            }
+        });
+    }
+
+    function makeBet(eventId){
+        var odd = Number($('#odd' + eventId).val());
+        var money = Number($('#money' + eventId).val());
+        let data = { EventId: eventId, Odd: odd, Money: money }
+        $.ajax({
+            type: 'POST',
+            url: 'api/bets',
+            contentType: 'application/json',
+            data: JSON.stringify(data), 
+            success: function (msg) {
+                updateHeader();
+                $(".toast-body").html(msg);
+                $('.toast').toast('show')
+            },
+            error: function (xhr, status, error) {
+                $(".toast-body").html(msg);
+                $('.toast').toast('show')
+            }
+        });
+    }
+</script>
