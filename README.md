@@ -10,6 +10,6 @@ Hello!
 - Get All Bets Logs Endpoint:
   Done in BetsController -> GetBets method.
 - Submission:
-  Provide a GitHub repository with your .NET Web API project - done as you see
-  Write unit tests for key functionalities - not done, because I'm not experienced in testing so decided to focus more on other parts
-  Demonstrate your approach for handling edge cases and errors - system shows beatiful error messages
+  1. Provide a GitHub repository with your .NET Web API project - done as you see
+  2. Write unit tests for key functionalities - not done, because I'm not experienced in testing so decided to focus more on other parts
+  3. Demonstrate your approach for handling edge cases and errors - system shows beatiful error messages
