@@ -1,4 +1,5 @@
 Hello!
+Username: LuckerOne, Password: LuckerOne
 - Place Bet Endpoint:
   1. Done in BetsController -> MakeBet method.
 - Validation: 
