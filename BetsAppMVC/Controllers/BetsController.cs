@@ -22,6 +22,12 @@ namespace BetsAppMVC.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+        [HttpGet]
+        public JsonResult GetAll()
+        {
+            return new JsonResult(_betsService.GetAll());
+        }
+
         [HttpPost]
         public JsonResult MakeBet(BetsApiModel model)
         {

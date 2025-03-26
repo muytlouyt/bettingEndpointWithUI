@@ -4,6 +4,7 @@ namespace BetsAppMVC.Services
 {
     public interface IBetsService
     {
+        public List<Bet> GetAll();
         void MakeBet(int playerId, int eventId, double odd, double money);
     }
     public class BetsService : IBetsService
@@ -13,6 +14,10 @@ namespace BetsAppMVC.Services
         public BetsService()
         {
             _bets = JsonHelper.ReadJson<Bet>(fileName);
+        }
+        public List<Bet> GetAll()
+        {
+            return _bets;
         }
         public void MakeBet(int playerId, int eventId, double odd, double money)
         {

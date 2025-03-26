@@ -50,6 +50,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+    <button onclick="getBets();">Show all bets</button>
 </div>
 
 <script>
@@ -89,6 +90,31 @@
             },
             error: function (xhr, status, error) {
                 $(".toast-body").html(msg);
+                $('.toast').toast('show')
+            }
+        });
+    }
+
+    function getBets() {
+        $.ajax({
+            type: 'GET',
+            url: 'api/bets',
+            contentType: 'application/json',
+            success: function (data) {
+                let pretty = '';
+                for (var i = 0; i < data.length; i++) {
+                    pretty += '<div>';
+                    pretty += 'PlayerId: ' + data[i].playerId;
+                    pretty += ',EventId: ' + data[i].eventId;
+                    pretty += ',Odd: ' + data[i].odd;
+                    pretty += ',Money: ' + data[i].money;
+                    pretty += '</div>';
+                }
+                $(".toast-body").html(pretty);
+                $('.toast').toast('show')
+            },
+            error: function (xhr, status, error) {
+                $(".toast-body").html(error);
                 $('.toast').toast('show')
             }
         });
